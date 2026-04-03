@@ -48,6 +48,7 @@
         const ExternalLink = (props) => <Icon name="external-link" {...props} />;
         const Coffee = (props) => <Icon name="coffee" {...props} />;
         const Gamepad2 = (props) => <Icon name="gamepad-2" {...props} />;
+        const Bed = (props) => <Icon name="bed" {...props} />;
 
         const App = () => {
             const [activeTab, setActiveTab] = useState('day1');
@@ -67,7 +68,7 @@
                     { time: "11:30", activity: "抵達民宿", icon: <MapPin className="w-5 h-5" /> },
                     { time: "11:50", activity: "出發前往泛舟集合點", icon: <ArrowRight className="w-5 h-5" /> },
                     { time: "12:30", activity: "安農溪激流泛舟", icon: <Waves className="w-5 h-5 text-blue-500" />, highlight: true },
-                    { time: "15:00", activity: "返回民宿梳洗、休息、體驗設施", icon: <Info className="w-5 h-5" /> },
+                    { time: "15:00", activity: "返回民宿梳洗、休息、體驗設施", icon: <Bed className="w-5 h-5" /> }
                     { time: "18:00", activity: "民宿烤肉趴 (BBQ Party)", icon: <Flame className="w-5 h-5 text-orange-500" />, highlight: true }
                 ],
                 day2: [
