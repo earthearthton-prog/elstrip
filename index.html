@@ -24,7 +24,9 @@
         // 模擬 Lucide React 元件
         const Icon = ({ name, className }) => {
             useEffect(() => {
-                lucide.createIcons();
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
             }, [name, className]);
             return <i data-lucide={name} className={className}></i>;
         };
@@ -240,7 +242,7 @@
                         </div>
                         <div className="space-y-4">
                             {schedule[activeTab].map((item, idx) => (
-                                <div key={idx} className={`flex items-center p-6 rounded-2xl border-2 transition-all ${item.highlight ? 'bg-blue-50 border-blue-200 scale-105 shadow-md' : 'bg-white border-transparent'}`}>
+                                <div key={`${activeTab}-${idx}`} className={`flex items-center p-6 rounded-2xl border-2 transition-all ${item.highlight ? 'bg-blue-50 border-blue-200 scale-105 shadow-md' : 'bg-white border-transparent'}`}>
                                     <div className="w-20 font-mono text-blue-600 font-bold text-lg">{item.time}</div>
                                     <div className="mr-4 p-2 bg-slate-100 rounded-full">{item.icon}</div>
                                     <div className="text-xl font-medium text-slate-700">{item.activity}</div>
@@ -324,7 +326,7 @@
                                     <Clock className="text-yellow-600 mr-4 mt-1 shrink-0" />
                                     <p className="text-yellow-800 text-sm">
                                         <strong>截止日期：</strong> {eventInfo.deadline} (二) 截止報名。<br />
-                                        <strong>名額限制：</strong> 上限 {eventInfo.limit} 人，按報名順序遞補，手速要快！
+                                        <strong>名應限制：</strong> 上限 {eventInfo.limit} 人，按報名順序遞補，手速要快！
                                     </p>
                                 </div>
                             </div>
