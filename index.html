@@ -18,20 +18,23 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // 解構 React Hooks
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
-        // 模擬 Lucide React 元件
+        // 修正後的 Icon 元件：使用 ref 確保 lucide 只作用於目前的 i 標籤
         const Icon = ({ name, className }) => {
+            const iconRef = useRef(null);
             useEffect(() => {
-                if (window.lucide) {
-                    lucide.createIcons();
+                if (window.lucide && iconRef.current) {
+                    lucide.createIcons({
+                        attrs: { class: className },
+                        nameAttr: 'data-lucide',
+                        icons: { [name]: lucide.icons[name] }
+                    });
                 }
             }, [name, className]);
-            return <i data-lucide={name} className={className}></i>;
+            return <i ref={iconRef} data-lucide={name} className={className}></i>;
         };
 
-        // 定義各個圖示元件，對應原本程式碼中的 Lucide 元件
         const Waves = (props) => <Icon name="waves" {...props} />;
         const Flame = (props) => <Icon name="flame" {...props} />;
         const Music = (props) => <Icon name="music" {...props} />;
@@ -326,7 +329,7 @@
                                     <Clock className="text-yellow-600 mr-4 mt-1 shrink-0" />
                                     <p className="text-yellow-800 text-sm">
                                         <strong>截止日期：</strong> {eventInfo.deadline} (二) 截止報名。<br />
-                                        <strong>名應限制：</strong> 上限 {eventInfo.limit} 人，按報名順序遞補，手速要快！
+                                        <strong>名額限制：</strong> 上限 {eventInfo.limit} 人，按報名順序遞補，手速要快！
                                     </p>
                                 </div>
                             </div>
